@@ -1,4 +1,23 @@
-<%# <% unless current_user %> %>
-  <h2>ようこそ</h2>
-<%# <% end%> %>
+<% if current_user %>
+  <h2>
+    <div>
+      <%= "こんにちは、#{current_user.nickname}さん"%>
+    </div>
+  </h2>
+    <div>
+      <%= link_to '部屋を作成する', "#" %>
+      <%= link_to '部屋を検索する', "#"%>
+    </div>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+    </div>
+
+<% else %>
+  <div>
+    <%= "ようこそ、質問投稿アプリへ" %>
+  </div>
+  <div>
+    <%= link_to 'ログイン', new_user_session_path %>
+    <%= link_to '新規登録', new_user_registration_path %>
+  </div>
+<% end%>
 
