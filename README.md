@@ -1,24 +1,74 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column           | Type    | Options     |
+| ---------------- | ------- | ----------  |
+| nickname         | string  | null: false |
+| email            | string  | null: false |
+| password         | string  | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :room_users
+- has_many :articles
+- has_many :comments
 
-* Configuration
+## rooms テーブル
 
-* Database creation
+| Column           | Type    | Options     |
+| ---------------- | ------- | ----------  |
+| name             | string  | null: false |
+| password         | string  | null: false |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_many :rooms_users
+- has_many :articles
+- has_many :comments
 
-* Services (job queues, cache servers, search engines, etc.)
+## room_users テーブル
 
-* Deployment instructions
+| Column     | Type        | Options                        |
+| -----------| -------     | ------------------------------ |
+| user       | references  | null: false, foreign_key: true |
+| room       | references  | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :room
+
+### articles テーブル
+
+| Column         | Type       | Options                        |
+| ---------------| ---------- | ------------------------------ |
+| title          | string     | null: false                    |
+| content        | string     | null: false                    |
+| tag            | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| room           | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :room
+
+### comments テーブル
+
+| Column         | Type       | Options                        |
+| ---------------| ---------- | ------------------------------ |
+| comment        | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| room           | references | null: false, foreign_key: true |
+| article        | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :room
+- belongs_to :article
+
+
+
+
