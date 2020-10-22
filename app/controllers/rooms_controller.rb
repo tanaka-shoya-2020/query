@@ -10,8 +10,11 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
     if @room.valid?
       @room.save
+      log_in @room
+      flash[:success] = "ルームを作成しました"
       redirect_to root_path
     else
+      flash.now[:danger] = "同一のルーム名が存在するか、パスワードが不正です"
       render :new
     end
   end

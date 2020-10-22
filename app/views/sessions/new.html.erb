@@ -1,6 +1,6 @@
-<h2>ルームを作成</h2>
+<h2>ルームに入室</h2>
 
-<%= form_with model: @room, url: rooms_path, local: true do |f| %>
+<%= form_with scope: :session, url: sessions_path, local: true do |f| %>
 
   <div class="field">
     <%= f.label :name %><br />
@@ -11,11 +11,6 @@
     <%= f.label :password %><br />
     <%= "6文字以上の英数字を入力してください"%><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
   <div class="actions">

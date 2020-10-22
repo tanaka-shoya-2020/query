@@ -4,13 +4,20 @@
       <%= "こんにちは、#{current_user.nickname}さん"%>
     </div>
   </h2>
-    <div>
-      <%= link_to '部屋を作成する',  new_room_path %>
-      <%= link_to '部屋を検索する', "#"%>
-    </div>
+    <% unless room_logged_in? %>
+      <div>
+        <%= link_to 'ルームを作成する',  new_room_path %>
+        <%= link_to '入室する', new_session_path %>
+      </div>
+      <div>
+        <%= link_to 'ルームを検索する', "#"%>
+      </div>
+    <% else %>
+      <div>
+        <%= link_to 'ルームを退出する', session_path(current_room), method: :delete%>
+      </div>
+    <% end%>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-    </div>
-
 <% else %>
   <div>
     <%= "ようこそ、質問投稿アプリへ" %>
