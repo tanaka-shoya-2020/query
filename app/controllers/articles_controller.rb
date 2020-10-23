@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
   
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
+
   def index
     @room = Room.find(current_room.id)
     @articles = @room.articles.includes(:user)
@@ -21,15 +24,12 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
     if @article.update(article_params)
       @article.valid?
       redirect_to article_path(@article)
@@ -40,7 +40,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
     if @article.destroy
       flash[:success] = "削除に成功しました"
       redirect_to articles_path
@@ -53,5 +52,15 @@ class ArticlesController < ApplicationController
 
     def article_params
       params.require(:article).permit(:title, :text).merge(user_id: current_user.id, room_id: current_room.id)
+    end
+
+    def set_article
+      @article = Article.find(params[:id])
+    end
+
+    def move_to_index
+      unless user_signed_in?? current_user_id == @article.user.id
+        redirect_to action: :index
+      end
     end
 end

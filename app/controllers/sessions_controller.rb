@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
+  
+  before_action :move_to_root_path, only: [:new, :create, :destroy]
+
   def new
-    
   end
 
   def create
@@ -20,4 +22,13 @@ class SessionsController < ApplicationController
     flash[:success] = "ルームを退出しました"
     redirect_to root_path
   end
+
+  private
+
+    def move_to_root_path
+      unless user_signed_in?
+        flash[:danger] = "ログインが必要です"
+        redirect_to root_path
+      end
+    end
 end
