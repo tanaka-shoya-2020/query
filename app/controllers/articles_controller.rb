@@ -59,7 +59,7 @@ class ArticlesController < ApplicationController
     end
 
     def move_to_index
-      unless user_signed_in?? current_user_id == @article.user.id
+      unless user_signed_in? && (current_user_id == @article.user.id)
         redirect_to action: :index
       end
     end
