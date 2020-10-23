@@ -1,4 +1,7 @@
 class RoomsController < ApplicationController
+  
+  before_action :move_to_root_path, only: [:new, :create]
+  
   def index
   end
 
@@ -25,4 +28,11 @@ class RoomsController < ApplicationController
     def room_params
       params.require(:room).permit(:name, :password, :password_confirmation)
     end
+
+    def move_to_root_path
+      unless user_signed_in? 
+        redirect_to root_path
+      end
+    end
+
 end

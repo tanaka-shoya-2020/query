@@ -1,0 +1,18 @@
+<div>
+  <%= "#{@user.nickname}さんの投稿一覧" %>
+</div>
+  <% @articles.each do |article| %>
+    <div>
+      <div>
+        <%= article.title %>
+      </div>
+      <div>
+        <%= markdown(article.text).html_safe %>
+      </div>
+      <% if user_signed_in? && current_user == article.user%>
+        <%= link_to "編集する", edit_article_path(article) %>
+        <%= link_to "削除する", article_path(article) %>
+      <% end %>
+    </div>
+  <% end %>
+<%= link_to "ホームに戻る", root_path %>
