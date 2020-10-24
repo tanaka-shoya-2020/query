@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def move_to_root_path
     @user = User.find(params[:id])
     return if user_signed_in? && current_user.id == @user.id
+
     flash[:danger] = '他人の詳細ページを閲覧することはできません'
     redirect_to root_path
   end
