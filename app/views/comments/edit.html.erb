@@ -1,0 +1,9 @@
+<%=  form_with(model: [@article,@comment], local: true) do |f| %>
+  <div class="field">
+    <%= f.text_area :comment, placeholder: "コメントする", autofocus: true%>
+  </div>
+
+  <div class="actions"> 
+    <%= f.submit "コメントを更新する" %>
+  </div>
+<% end %>
