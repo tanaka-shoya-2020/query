@@ -1,13 +1,13 @@
 <div>
-  <span>タイトル：
+  <span>タイトル:
       <%= @article.title %>
   </span>
 </div>
-<span>投稿者：
+<span>投稿者:
   <span>
     <%= "#{@article.user.nickname}さん" %>
   </span>
-</span>
+</span> 
 <div>
   <%= markdown(@article.text).html_safe %>
 </div>
@@ -19,6 +19,29 @@
   <% end%>
   <%# 条件分岐終わり %>
 </div>
+
+<%=  form_with(model: [@article,@comment], local: true) do |f| %>
+  <div class="field">
+    <%= f.text_area :comment, placeholder: "コメントする", autofocus: true%>
+  </div>
+
+  <div class="actions"> 
+    <%= f.submit "コメントを投稿する" %>
+  </div>
+<% end %>
+
+<% if @comments %>
+  <h4>コメント一覧</h4>
+  <% @comments.each do |comment| %>
+    <p> 
+      <%= "投稿者: #{comment.user.nickname}"%><br>
+      <%= comment.comment %><br />
+      <%= link_to "編集する", edit_article_comment_path(@article,comment) %>,
+      <%= link_to "削除する", article_comment_path(@article,comment), method: :delete %>
+    </p>
+  <% end%>
+<% end %>
+
 <div>
   <%= link_to "投稿一覧画面に戻る", articles_path %>
 </div>

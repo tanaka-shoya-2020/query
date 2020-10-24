@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :rooms, only: [:index, :new, :create] 
   resources :sessions, only: [:new, :create, :destroy]
   resources :articles do
-    resources :comments, only: [:new, :create, :edit, :update, :destroy]
+    resources :comments, only: [:create, :edit, :update, :destroy]
   end
 
   resources :users, only: [:show]

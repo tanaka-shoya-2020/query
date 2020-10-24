@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
   private
 
   def move_to_root_path
-    returun if user_signed_in?
+    return if user_signed_in?
     flash[:danger] = 'ログインが必要です'
     redirect_to root_path
   end

@@ -23,6 +23,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @article.comments
   end
 
   def edit
@@ -58,6 +60,6 @@ class ArticlesController < ApplicationController
   end
 
   def move_to_index
-    redirect_to action: :index unless user_signed_in? && (current_user_id == @article.user.id)
+    redirect_to action: :index unless user_signed_in? && (current_user == @article.user)
   end
 end
