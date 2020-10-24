@@ -12,7 +12,7 @@ RSpec.describe Comment, type: :model do
       end
 
       it 'コメントが200文字以内の時' do
-        @comment.comment = 'a'*200
+        @comment.comment = 'a' * 200
         expect(@comment).to be_valid
       end
     end
@@ -27,25 +27,25 @@ RSpec.describe Comment, type: :model do
       it 'コメントが201文字以上の時' do
         @comment.comment = 'a' * 201
         @comment.valid?
-        expect(@comment.errors.full_messages).to include("Comment is too long (maximum is 200 characters)")
+        expect(@comment.errors.full_messages).to include('Comment is too long (maximum is 200 characters)')
       end
 
       it 'userの紐付けがなくなった時' do
         @comment.user = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include("User must exist")
+        expect(@comment.errors.full_messages).to include('User must exist')
       end
 
       it 'roomの紐付けがなくなった時' do
         @comment.room = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include("Room must exist")
+        expect(@comment.errors.full_messages).to include('Room must exist')
       end
 
       it 'articleの紐付けがなくなった時' do
         @comment.article = nil
         @comment.valid?
-        expect(@comment.errors.full_messages).to include("Article must exist")
+        expect(@comment.errors.full_messages).to include('Article must exist')
       end
     end
   end
