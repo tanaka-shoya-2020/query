@@ -13,4 +13,5 @@ class User < ApplicationRecord
   validates_format_of :email, with: VALID_EMAIL_REGEX
 
   has_many :articles
+  has_many :comments
 end

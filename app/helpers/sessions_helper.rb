@@ -1,5 +1,4 @@
 module SessionsHelper
-
   def log_in(room)
     session[:room_id] = room.id
   end
@@ -14,9 +13,6 @@ module SessionsHelper
   end
 
   def current_room
-    if session[:room_id]
-      @current_room ||= Room.find_by(id: session[:room_id])
-    end
+    @current_room ||= Room.find_by(id: session[:room_id]) if session[:room_id]
   end
-
 end

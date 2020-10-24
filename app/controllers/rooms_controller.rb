@@ -1,7 +1,6 @@
 class RoomsController < ApplicationController
-  
   before_action :move_to_root_path, only: [:new, :create]
-  
+
   def index
   end
 
@@ -14,25 +13,21 @@ class RoomsController < ApplicationController
     if @room.valid?
       @room.save
       log_in @room
-      flash[:success] = "ルームを作成しました"
+      flash[:success] = 'ルームを作成しました'
       redirect_to root_path
     else
-      flash.now[:danger] = "同一のルーム名が存在するか、パスワードが不正です"
+      flash.now[:danger] = '同一のルーム名が存在するか、パスワードが不正です'
       render :new
     end
   end
 
+  private
 
+  def room_params
+    params.require(:room).permit(:name, :password, :password_confirmation)
+  end
 
-  private 
-    def room_params
-      params.require(:room).permit(:name, :password, :password_confirmation)
-    end
-
-    def move_to_root_path
-      unless user_signed_in? 
-        redirect_to root_path
-      end
-    end
-
+  def move_to_root_path
+    redirect_to root_path unless user_signed_in?
+  end
 end

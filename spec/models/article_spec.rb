@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Article, type: :model do
-  
   before do
     @user = FactoryBot.create(:user)
     @room = FactoryBot.create(:room)
@@ -14,7 +13,7 @@ RSpec.describe Article, type: :model do
         expect(@article).to be_valid
       end
       it 'titleが50文字以下の時' do
-        @article.title = "a"*50
+        @article.title = 'a' * 50
         @article.save
         expect(@article).to be_valid
       end
@@ -22,15 +21,15 @@ RSpec.describe Article, type: :model do
 
     context '新規投稿が失敗する時' do
       it 'titleが存在しない時' do
-        @article.title = ""
+        @article.title = ''
         @article.valid?
         expect(@article.errors.full_messages).to include("Title can't be blank")
       end
 
       it 'titleが51文字以上の時' do
-        @article.title = "a"*51
+        @article.title = 'a' * 51
         @article.valid?
-        expect(@article.errors.full_messages).to include("Title is too long (maximum is 50 characters)")
+        expect(@article.errors.full_messages).to include('Title is too long (maximum is 50 characters)')
       end
 
       it 'textが存在しない時' do
@@ -53,4 +52,3 @@ RSpec.describe Article, type: :model do
     end
   end
 end
-

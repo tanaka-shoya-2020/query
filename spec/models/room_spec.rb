@@ -11,7 +11,7 @@ RSpec.describe Room, type: :model do
         expect(@room).to be_valid
       end
       it 'nameが20文字以下の時' do
-        @room.name = "a"*20
+        @room.name = 'a' * 20
         expect(@room).to be_valid
       end
     end
@@ -28,13 +28,13 @@ RSpec.describe Room, type: :model do
         @another_room = FactoryBot.build(:room)
         @another_room.name = @room.name
         @another_room.valid?
-        expect(@another_room.errors.full_messages).to include("Name has already been taken")
+        expect(@another_room.errors.full_messages).to include('Name has already been taken')
       end
 
       it 'nameが21文字以上だと登録できない' do
-        @room.name = "a"*21
+        @room.name = 'a' * 21
         @room.valid?
-        expect(@room.errors.full_messages).to include("Name is too long (maximum is 20 characters)")
+        expect(@room.errors.full_messages).to include('Name is too long (maximum is 20 characters)')
       end
 
       it 'passwordが空だと登録できない' do
@@ -45,35 +45,35 @@ RSpec.describe Room, type: :model do
       end
 
       it 'passwordが5文字以下だと登録できない' do
-        @room.password = "1234a"
-        @room.password_confirmation = "1234a"
+        @room.password = '1234a'
+        @room.password_confirmation = '1234a'
         @room.valid?
-        expect(@room.errors.full_messages).to include("Password is invalid")
+        expect(@room.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordが6文字以上だが英字のみであると登録できない' do
-        @room.password = "abcdef"
-        @room.password_confirmation = "abcdef"
+        @room.password = 'abcdef'
+        @room.password_confirmation = 'abcdef'
         @room.valid?
-        expect(@room.errors.full_messages).to include("Password is invalid")
+        expect(@room.errors.full_messages).to include('Password is invalid')
       end
 
       it 'passwordが6文字以上だが数字のみだと登録できない' do
-        @room.password = "123456"
-        @room.password_confirmation = "123456"
+        @room.password = '123456'
+        @room.password_confirmation = '123456'
         @room.valid?
-        expect(@room.errors.full_messages).to include("Password is invalid")
+        expect(@room.errors.full_messages).to include('Password is invalid')
       end
 
       it 'password_confirmationが空だと登録できない' do
-        @room.password_confirmation = ""
+        @room.password_confirmation = ''
         @room.valid?
         expect(@room.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
       it 'passwordとpassword_confirmationが異なっていると登録できない' do
-        @room.password = "11111a"
-        @room.password_confirmation = "1111111a"
+        @room.password = '11111a'
+        @room.password_confirmation = '1111111a'
         @room.valid?
         expect(@room.errors.full_messages).to include("Password confirmation doesn't match Password")
       end

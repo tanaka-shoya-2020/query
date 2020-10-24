@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
 
@@ -18,7 +17,7 @@ class ArticlesController < ApplicationController
       @article.save
       redirect_to articles_path
     else
-      flash.now[:danger] = "記事が保存されませんでした"
+      flash.now[:danger] = '記事が保存されませんでした'
       render :new
     end
   end
@@ -34,14 +33,14 @@ class ArticlesController < ApplicationController
       @article.valid?
       redirect_to article_path(@article)
     else
-      flash.now[:danger] = "投稿の編集に失敗しました"
+      flash.now[:danger] = '投稿の編集に失敗しました'
       render :edit
     end
   end
 
   def destroy
     if @article.destroy
-      flash[:success] = "削除に成功しました"
+      flash[:success] = '削除に成功しました'
       redirect_to articles_path
     else
       render :show
@@ -50,17 +49,15 @@ class ArticlesController < ApplicationController
 
   private
 
-    def article_params
-      params.require(:article).permit(:title, :text).merge(user_id: current_user.id, room_id: current_room.id)
-    end
+  def article_params
+    params.require(:article).permit(:title, :text).merge(user_id: current_user.id, room_id: current_room.id)
+  end
 
-    def set_article
-      @article = Article.find(params[:id])
-    end
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
-    def move_to_index
-      unless user_signed_in? && (current_user_id == @article.user.id)
-        redirect_to action: :index
-      end
-    end
+  def move_to_index
+    redirect_to action: :index unless user_signed_in? && (current_user_id == @article.user.id)
+  end
 end

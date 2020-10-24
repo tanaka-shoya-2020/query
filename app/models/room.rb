@@ -1,6 +1,6 @@
 class Room < ApplicationRecord
-  validates :name, presence: true, length: { maximum: 20},
-            uniqueness: { case_sensitive: true }
+  validates :name, presence: true, length: { maximum: 20 },
+                   uniqueness: { case_sensitive: true }
   has_secure_password
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i.freeze
@@ -8,4 +8,5 @@ class Room < ApplicationRecord
   validates :password, presence: true
 
   has_many :articles
+  has_many :comments
 end
