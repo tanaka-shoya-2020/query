@@ -1,35 +1,27 @@
-<div>
-  <span>タイトル:
-      <%= @article.title %>
-  </span>
-</div>
-<span>投稿者:
-  <span>
+<div class="col-xs-8">
+  タイトル:
+      <%= @article.title %><br>
+  投稿者:
     <%= "#{@article.user.nickname}さん" %>
-  </span>
-</span> 
-<div>
   <%= markdown(@article.text).html_safe %>
-</div>
-<div>
   <%# ユーザーが投稿したユーザーかそうでないかで条件分岐 %>
   <% if user_signed_in? && current_user.id == @article.user.id %>
     <%= link_to "編集する", edit_article_path(@article.id) %>
     <%= link_to "削除する", article_path(@article.id), method: :delete %>
   <% end%>
   <%# 条件分岐終わり %>
+  <%=  form_with(model: [@article,@comment], local: true) do |f| %>
+    <div class="field">
+      <%= f.text_area :comment, placeholder: "コメントする", autofocus: true%>
+    </div>
+
+    <div class="actions"> 
+      <%= f.submit "コメントを投稿する" %>
+    </div>
+  <% end %>
 </div>
 
-<%=  form_with(model: [@article,@comment], local: true) do |f| %>
-  <div class="field">
-    <%= f.text_area :comment, placeholder: "コメントする", autofocus: true%>
-  </div>
-
-  <div class="actions"> 
-    <%= f.submit "コメントを投稿する" %>
-  </div>
-<% end %>
-
+<div class="col-xs-4">
 <% if @comments %>
   <h4>コメント一覧</h4>
   <% @comments.each do |comment| %>
@@ -41,6 +33,7 @@
     </p>
   <% end%>
 <% end %>
+</div>
 
 <div>
   <%= link_to "投稿一覧画面に戻る", articles_path %>

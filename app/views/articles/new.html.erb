@@ -1,18 +1,4 @@
-<h2>新規投稿画面</h2>
-<%= form_with model: @article, url: articles_path, local: true do |f| %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <em>タイトルは最大50文字までしか入力できません</em><br />
-    <%= f.text_area :title, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :text %><br />
-    <%= f.text_area :text, autocomplete: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "記事を投稿する" %>
-  </div>
-<% end%>
+<div class="container-fluid">
+  <h2 class="text-center">新規投稿</h2>
+  <%= render partial: "form", locals: { article: @article } %>
+</div>
