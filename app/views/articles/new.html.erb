@@ -24,14 +24,16 @@
 ## 自分が新しく学んだものは何であるのか
 
 ## どの部分を理解するのに苦労したか"%>
-      <%= f.text_area :text, value: "#{text}",rows: "20",class: "form-control",autocomplete: true %>
+      <%= f.text_area :text, value: "#{text}", placeholder: "投稿したい内容を30字から10000字で記入してください。
+      
+記入はマークアップ言語を用いて書くと綺麗に書くことができます。", rows: "20",class: "form-control",autocomplete: true %>
     </div>
   </div>
 
   <div class="col-xs-6">
     <% if @article %>
     <%# <div class="border"> %>
-      <%# <%= markdown(@article.text).html_safe  %> %>
+      <%# <%= markdown(@article.text).html_safe  %> 
     </div>
     <% end %>
   <%# </div> %>

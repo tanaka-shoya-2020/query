@@ -4,21 +4,21 @@
     <div class="col-xs-6 col-xs-offset-3">
       <div class="form-group">
         <%= f.label :名前 %><br>
-        <%= f.text_field :name, autofocus: true, placeholder: "名前を入力してください(最大20文字まで)", autocomplete: "email", class: "form-control" %>
+        <%= f.text_field :name, autofocus: true, placeholder: "名前を入力してください(最大20文字まで)", class: "form-control" %>
       </div>
 
       <div class="form-group">
         <%= f.label :パスワード %><br>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "6文字以上の英数字を入力してください", class: "form-control" %>
+        <%= f.password_field :password, placeholder: "6文字以上の英数字を入力してください", class: "form-control" %>
       </div>
 
       <div class="form-group">
         <%= f.label :パスワード確認 %><br>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "同じパスワードを入力してください", class: "form-control" %>
+        <%= f.password_field :password_confirmation, placeholder: "同じパスワードを入力してください", class: "form-control" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "Sign up", class: "btn btn-primary btn-lg btn-block" %>
+        <%= f.submit "ルームを作成", class: "btn btn-primary btn-lg btn-block" %>
       </div>
     </div>
   <% end %>
