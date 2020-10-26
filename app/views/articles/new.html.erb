@@ -1,4 +1,43 @@
 <div class="container-fluid">
   <h2 class="text-center">新規投稿</h2>
-  <%= render partial: "form", locals: { article: @article } %>
+  <%= form_with model: @article, url: articles_path, local: true do |f| %>
+  <div class="col-xs-6">
+    <div class="form-group">
+      <%= f.label :タイトル %>
+      <em>50文字までしか入力できません</em><br />
+      <%= f.text_area :title, placeholder: "タイトルを入力してください",class: "form-control",autofocus: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :テキスト %><br />
+      <% text = "### 投稿したい記事
+以下に投稿したい内容を記入してください
+
+(例)rubyにおけるform_withについて
+
+## 使用した言語
+
+```言語を入力
+ここにコードを記入
+```
+
+## 自分が新しく学んだものは何であるのか
+
+## どの部分を理解するのに苦労したか"%>
+      <%= f.text_area :text, value: "#{text}",rows: "20",class: "form-control",autocomplete: true %>
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <% if @article %>
+    <%# <div class="border"> %>
+      <%# <%= markdown(@article.text).html_safe  %> %>
+    </div>
+    <% end %>
+  <%# </div> %>
+
+  <div class="actions">
+    <%= f.submit "記事を投稿する",class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end%>
 </div>
