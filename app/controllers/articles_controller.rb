@@ -76,7 +76,7 @@ class ArticlesController < ApplicationController
     if current_user != @article.user
       flash.now[:danger] = "自身の投稿ではありません"
       redirect_to root_path
-    elsif current_room != @arcicle.room
+    elsif current_room != @article.room
       flash.now[:danger] = "その記事はこのルームのものではないため、編集、削除はできません"
       redirect_to root_path
     end
