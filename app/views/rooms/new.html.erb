@@ -3,19 +3,20 @@
 <%= form_with model: @room, url: rooms_path, local: true do |f| %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= "名前を入力してください(最大20文字まで)"%>
+    <%= f.label :name %>
+    (名前を入力してください(最大20文字まで)<br>
     <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <%= f.label :password %><br />
-    <%= "6文字以上の英数字を入力してください"%><br />
+    <%= f.label :password %>
+    (6文字以上の英数字を入力してください)<br>
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :password_confirmation %>
+    (同じパスワードを入力してください)<br>
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 

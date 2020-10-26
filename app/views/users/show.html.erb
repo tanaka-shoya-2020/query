@@ -9,7 +9,13 @@
       <div>
         <%= markdown(article.text).html_safe %>
       </div>
-      <% if user_signed_in? && current_user == article.user%>
+      <% if user_signed_in? && !room_logged_in? %>
+        <p class="container bg-warning">編集や削除をしたい場合、記事を投稿したルームに入室してください</p><br>
+        <%= link_to '入室する', new_session_path %>
+      <% elsif current_room != article.room %>
+        <p class="container bg-warning">ルームが異なるため編集、削除ができません</p><br>
+        上記の記事を投稿したルームは<strong><%= "#{article.room.name}" %></strong>です
+      <% else %>
         <%= link_to "編集する", edit_article_path(article) %>
         <%= link_to "削除する", article_path(article) %>
       <% end %>
