@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :move_to_sign_in
   before_action :filter, only: [:edit, :update, :destroy]

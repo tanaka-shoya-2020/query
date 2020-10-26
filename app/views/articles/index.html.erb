@@ -13,16 +13,17 @@
           <%# 長すぎる文章を折り畳み %>
             <%= markdown(article.text).html_safe %>
           </div>
+          <%= link_to "詳細を確認する", article_path(article.id), class: 'btn btn-info btn-block' %>
+          <%# ユーザーが投稿したユーザーかそうでないかで条件分岐 %>
+          <% if user_signed_in? && current_user.id == article.user.id %>
+            <%= link_to "編集する", edit_article_path(article.id), class: "btn btn-warning btn-block" %>
+            <%= link_to "削除する", article_path(article.id), method: :delete, class: "btn btn-danger btn-block", data: { confirm: "本当に削除しますか" } %><br>
+          <% end%>
+          <%# 条件分岐終わり %>
         </details>
       </h3>
       投稿者:<%= "#{article.user.nickname}さん" %><br>
-        <%= link_to "詳細を確認する", article_path(article.id), class: 'btn btn-info btn-block' %>
-        <%# ユーザーが投稿したユーザーかそうでないかで条件分岐 %>
-      <% if user_signed_in? && current_user.id == article.user.id %>
-          <%= link_to "編集する", edit_article_path(article.id), class: "btn btn-warning btn-block" %>
-          <%= link_to "削除する", article_path(article.id), method: :delete, class: "btn btn-danger btn-block", data: { confirm: "本当に削除しますか" } %><br>
-      <% end%>
-      <%# 条件分岐終わり %>
+      
     <% end %>
   </div>
 

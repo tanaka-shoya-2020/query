@@ -4,8 +4,7 @@
   <div class="col-xs-6">
     <div class="form-group">
       <%= f.label :タイトル %>
-      <em>50文字までしか入力できません</em><br />
-      <%= f.text_area :title, placeholder: "タイトルを入力してください",class: "form-control",autofocus: true %>
+      <%= f.text_area :title, placeholder: "タイトルを入力してください(最大50文字)",class: "form-control",autofocus: true %>
     </div>
 
     <div class="form-group">
@@ -15,9 +14,10 @@
 
 (例)rubyにおけるform_withについて
 
-## 使用した言語
+## 使用した言語(ruby ,html ,css など)
+(注意)上の言語を日本語にしたまま入力するとエラーが起こります!
 
-```言語を入力
+```ruby
 ここにコードを記入
 ```
 
@@ -25,7 +25,7 @@
 
 ## どの部分を理解するのに苦労したか"%>
       <%= f.text_area :text, value: "#{text}", placeholder: "投稿したい内容を30字から10000字で記入してください。
-      
+
 記入はマークアップ言語を用いて書くと綺麗に書くことができます。", rows: "20",class: "form-control",autocomplete: true %>
     </div>
   </div>
