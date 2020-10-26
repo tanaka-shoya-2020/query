@@ -21,7 +21,7 @@ module ApplicationHelper
                language
              end
 
-      CodeRay.scan(code, :lang).div
+      CodeRay.scan(code, lang).div
     end
   end
 

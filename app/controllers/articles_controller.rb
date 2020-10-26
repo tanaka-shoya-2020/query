@@ -64,20 +64,20 @@ class ArticlesController < ApplicationController
 
   def move_to_sign_in
     if !user_signed_in?
-      flash[:danger] = "ログインしてください"
-      redirect_to new_session_path 
+      flash[:danger] = 'ログインしてください'
+      redirect_to new_session_path
     elsif !room_logged_in?
-      flash[:danger] = "ルームに入室してください"
+      flash[:danger] = 'ルームに入室してください'
       redirect_to new_session_path
     end
   end
 
   def filter
     if current_user != @article.user
-      flash.now[:danger] = "自身の投稿ではありません"
+      flash.now[:danger] = '自身の投稿ではありません'
       redirect_to root_path
     elsif current_room != @article.room
-      flash.now[:danger] = "その記事はこのルームのものではないため、編集、削除はできません"
+      flash.now[:danger] = 'その記事はこのルームのものではないため、編集、削除はできません'
       redirect_to root_path
     end
   end
