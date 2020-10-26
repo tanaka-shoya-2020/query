@@ -20,7 +20,7 @@
       <%# ユーザーが投稿したユーザーかそうでないかで条件分岐 %>
       <% if user_signed_in? && current_user.id == article.user.id %>
         <%= link_to "編集する", edit_article_path(article.id) %>
-        <%= link_to "削除する", article_path(article.id), method: :delete %>
+        <%= link_to "削除する", article_path(article.id), method: :delete, data: { confirm: "本当に削除しますか" } %>
       <% end%>
       <%# 条件分岐終わり %>
       <%= link_to "詳細を確認する", article_path(article.id) %>
