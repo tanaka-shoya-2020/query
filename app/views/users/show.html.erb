@@ -1,24 +1,34 @@
-<div>
-  <%= "#{@user.nickname}さんの投稿一覧" %>
+<div class="container-fluid">
+  <div class="col-xs-6 col-xs-offset-3">
+    <h2>
+      <%= "#{@user.nickname}さんの投稿一覧" %>
+    </h2>
+      <% @articles.each do |article| %>
+      <h3>
+        <details>
+            <summary>
+              <%= article.title %>
+            </summary>
+          <div class= "size" >
+          <%# 長すぎる文章を折り畳み %>
+            <%= markdown(article.text).html_safe %>
+          </div>
+          <%# ユーザーがログインしているかそうでないかなどで条件分岐 %>
+          <% if user_signed_in? && !room_logged_in? %>
+            <p class="container bg-warning size">編集や削除をしたい場合、記事を投稿したルームに入ってください</p><br>
+            <%= link_to 'ルームに入る', new_session_path %>
+          <% elsif current_room != article.room %>
+            <p class="container bg-warning size">ルームが異なるため編集、削除ができません</p><br>
+            <p class="size1">上記の記事を投稿したルームは<strong><%= "#{article.room.name}" %></strong>です</p>
+          <% else %>
+            <%= link_to "詳細を確認する", article_path(article.id), class: 'btn btn-info btn-block' %>
+            <%= link_to "編集する", edit_article_path(article), class: "btn btn-warning btn-block"  %>
+            <%= link_to "削除する", article_path(article), method: :delete, class: "btn btn-danger btn-block", data: { confirm: "本当に削除しますか"} %>
+          <% end %>
+          <%# 条件分岐終わり %>
+        </details>
+      </h3>
+    <% end %>
+    <%= link_to "トップページに戻る", root_path%>
+  </div>
 </div>
-  <% @articles.each do |article| %>
-    <div>
-      <div>
-        <%= article.title %>
-      </div>
-      <div>
-        <%= markdown(article.text).html_safe %>
-      </div>
-      <% if user_signed_in? && !room_logged_in? %>
-        <p class="container bg-warning">編集や削除をしたい場合、記事を投稿したルームに入室してください</p><br>
-        <%= link_to '入室する', new_session_path %>
-      <% elsif current_room != article.room %>
-        <p class="container bg-warning">ルームが異なるため編集、削除ができません</p><br>
-        上記の記事を投稿したルームは<strong><%= "#{article.room.name}" %></strong>です
-      <% else %>
-        <%= link_to "編集する", edit_article_path(article) %>
-        <%= link_to "削除する", article_path(article) %>
-      <% end %>
-    </div>
-  <% end %>
-<%= link_to "ホームに戻る", root_path %>
