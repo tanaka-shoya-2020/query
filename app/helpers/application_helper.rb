@@ -4,7 +4,6 @@ module ApplicationHelper
 
   class HTMLwithCoderay < Redcarpet::Render::HTML
     def block_code(code, language)
-
       lang = case language.to_s
              when 'rb'
                'ruby'

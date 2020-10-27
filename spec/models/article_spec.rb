@@ -24,7 +24,7 @@ RSpec.describe Article, type: :model do
       end
 
       it 'textが10000文字以下の時' do
-        @article.text = 'a' * 10000
+        @article.text = 'a' * 10_000
         expect(@article).to be_valid
       end
     end
@@ -51,13 +51,13 @@ RSpec.describe Article, type: :model do
       it 'textが29文字の時' do
         @article.text = 'a' * 29
         @article.valid?
-        expect(@article.errors.full_messages).to include("Text is too short (minimum is 30 characters)")
+        expect(@article.errors.full_messages).to include('Text is too short (minimum is 30 characters)')
       end
 
       it 'textが10001文字の時' do
-        @article.text = 'a' * 10001
+        @article.text = 'a' * 10_001
         @article.valid?
-        expect(@article.errors.full_messages).to include("Text is too long (maximum is 10000 characters)")
+        expect(@article.errors.full_messages).to include('Text is too long (maximum is 10000 characters)')
       end
 
       it 'userの紐付けがない時' do
