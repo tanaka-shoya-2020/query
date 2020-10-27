@@ -12,9 +12,19 @@ RSpec.describe Article, type: :model do
       it 'titleとtextが存在する時' do
         expect(@article).to be_valid
       end
+
       it 'titleが50文字以下の時' do
         @article.title = 'a' * 50
-        @article.save
+        expect(@article).to be_valid
+      end
+
+      it 'textが30文字以上の時' do
+        @article.text = 'a' * 30
+        expect(@article).to be_valid
+      end
+
+      it 'textが10000文字以下の時' do
+        @article.text = 'a' * 10000
         expect(@article).to be_valid
       end
     end
@@ -36,6 +46,18 @@ RSpec.describe Article, type: :model do
         @article.text = nil
         @article.valid?
         expect(@article.errors.full_messages).to include("Text can't be blank")
+      end
+
+      it 'textが29文字の時' do
+        @article.text = 'a' * 29
+        @article.valid?
+        expect(@article.errors.full_messages).to include("Text is too short (minimum is 30 characters)")
+      end
+
+      it 'textが10001文字の時' do
+        @article.text = 'a' * 10001
+        @article.valid?
+        expect(@article.errors.full_messages).to include("Text is too long (maximum is 10000 characters)")
       end
 
       it 'userの紐付けがない時' do
