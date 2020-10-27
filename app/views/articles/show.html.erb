@@ -1,35 +1,31 @@
-<div>
-  <span>タイトル:
-      <%= @article.title %>
-  </span>
-</div>
-<span>投稿者:
-  <span>
-    <%= "#{@article.user.nickname}さん" %>
-  </span>
-</span> 
-<div>
+<div class="col-xs-8">
+  <h3>タイトル:
+      <%= @article.title %><br>
+  </h3>
+  <h3>
+    投稿者:
+      <%= "#{@article.user.nickname}さん" %>
+  </h3>
   <%= markdown(@article.text).html_safe %>
-</div>
-<div>
   <%# ユーザーが投稿したユーザーかそうでないかで条件分岐 %>
   <% if user_signed_in? && current_user.id == @article.user.id %>
-    <%= link_to "編集する", edit_article_path(@article.id) %>
-    <%= link_to "削除する", article_path(@article.id), method: :delete %>
+    <%= link_to "記事を編集する", edit_article_path(@article.id), class: "btn btn-primary space" %>
+    <%= link_to "記事を削除する", article_path(@article.id), method: :delete, class: "btn btn-danger space", data: { confirm: "本当に削除しますか" }  %>
   <% end%>
   <%# 条件分岐終わり %>
+  <h3>コメント投稿</h3>
+  <%=  form_with(model: [@article,@comment], local: true) do |f| %>
+    <div class="form-group">
+      <%= f.text_area :comment, placeholder: "コメントする", rows: "5",autofocus: true, class: "form-control"%>
+    </div>
+
+    <div class="actions"> 
+      <%= f.submit "コメントを投稿する", class: "btn btn-primary btn-lg btn-block margin" %>
+    </div>
+  <% end %>
 </div>
 
-<%=  form_with(model: [@article,@comment], local: true) do |f| %>
-  <div class="field">
-    <%= f.text_area :comment, placeholder: "コメントする", autofocus: true%>
-  </div>
-
-  <div class="actions"> 
-    <%= f.submit "コメントを投稿する" %>
-  </div>
-<% end %>
-
+<div class="col-xs-4">
 <% if @comments %>
   <h4>コメント一覧</h4>
   <% @comments.each do |comment| %>
@@ -41,8 +37,5 @@
     </p>
   <% end%>
 <% end %>
-
-<div>
-  <%= link_to "投稿一覧画面に戻る", articles_path %>
 </div>
 

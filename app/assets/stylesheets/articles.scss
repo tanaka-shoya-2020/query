@@ -4,5 +4,25 @@
 pre {
   background-color: #eee;
   padding: 10px;
-  font-size: 11px;
+  font-size: 14px;
+}
+.size {
+  font-size: 14px;
+}
+.size1{
+  font-size: 18px;
+}
+.border {
+  border: solid 1.5px;
+  border-color: #ccc;
+  border-radius: 4px;
+  padding: 15px;
+}
+
+.margin{
+  margin-bottom: 100px;
+}
+
+textarea{
+  resize: none;
 }

@@ -1,0 +1,49 @@
+<nav class="navbar navbar-inverse navbar-default navbar-fixed-top color">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"data-toggle="collapse"data-target="#navbarEexample8">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<%= link_to "Query", root_path, class:"navbar-brand"%>
+      <% if !user_signed_in? %> 
+        <p class="navbar-brand size">ようこそ、記事投稿アプリへ</p>
+      <% else %> 
+        <%= link_to "ようこそ、#{current_user.nickname}さん", user_path(current_user), class:"navbar-brand size"%> 
+      <% end %>
+		</div>
+		
+		<div class="collapse navbar-collapse" id="navbarEexample8">
+			<ul class="nav navbar-nav">
+				<% if !user_signed_in? %>
+        <% elsif !room_logged_in? %>
+          <li><%= link_to "ルームに入る", new_session_path %></li> 
+          <li><%= link_to "ルームを作成する", new_room_path %></li> 
+          <li><%= link_to "投稿した記事を見る", user_path(current_user)%></li> 
+        <% else %>
+          <li><%= link_to "記事を投稿する", new_article_path %></li> 
+          <li><%= link_to "記事を閲覧する", articles_path %></li> 
+          <li><%= link_to "投稿した記事を見る", user_path(current_user)%></li> 
+        <% end%>
+			</ul>
+			<% if !user_signed_in? %>
+        <button type="button" class="btn btn-info navbar-btn navbar-right space">
+          <%= link_to "新規登録", new_user_registration_path %>
+        </button>
+        <button type="button" class="btn btn-info navbar-btn navbar-right space">
+          <%= link_to "ログインする", new_user_session_path %>
+        </button>
+      <% elsif !room_logged_in? %>
+        <button type="button" class="btn btn-info navbar-btn navbar-right space">
+          <%= link_to "ログアウトする", destroy_user_session_path, method: :delete %>
+        </button>
+      <% else %>
+        <button type="button" class="btn btn-info navbar-btn navbar-right space">
+          <%= link_to "ルームを退出する", session_path(current_room), method: :delete %>
+        </button>
+      <% end%>
+		</div>
+	</div>
+</nav>

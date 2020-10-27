@@ -1,19 +1,22 @@
-<h2>ルームに入室</h2>
+<div class="container-fluid">
+  <h2 class="text-center">ルームに入る</h2>
+  <%= form_with scope: :session, url: sessions_path, local: true do |f| %>
 
-<%= form_with scope: :session, url: sessions_path, local: true do |f| %>
+  <div class="col-xs-6 col-xs-offset-3">
+      <div class="form-group">
+        <%= f.label :名前 %><br>
+        <%= f.text_field :name, autofocus: true, placeholder: "名前を入力してください(最大20文字まで)", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :パスワード %><br>
+        <%= f.password_field :password, placeholder: "6文字以上の英数字を入力してください", class: "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= "6文字以上の英数字を入力してください"%><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="actions">
+        <%= f.submit "ルームに入る", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>

@@ -1,0 +1,27 @@
+<%= form_with model: article, local: true do |f| %>
+  <div class="col-xs-6">
+    <div class="form-group">
+      <%= f.label :タイトル %>
+      <%= f.text_area :title, placeholder: "タイトルを入力してください(最大50文字)",class: "form-control",autofocus: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :テキスト %><br />
+      <%= f.text_area :text,rows: "20",class: "form-control",autocomplete: true %>
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <% if article %>
+      <p>プレビュー</p>
+      <div class="border">
+        <%= markdown(article.text).html_safe %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "記事を編集する",class: "btn btn-primary btn-lg btn-block" %>
+  </div>
+<% end%>
+

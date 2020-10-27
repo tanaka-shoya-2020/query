@@ -7,10 +7,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comments = @article.comments
     if @comment.valid?
+      flash[:success] = 'コメントが投稿されました'
       @comment.save
       redirect_to article_path(@article)
     else
-      flash[:danger] = 'コメントが投稿されませんでした'
+      flash.now[:danger] = 'コメントが投稿されませんでした'
       render template: 'articles/show'
     end
   end
@@ -31,11 +32,11 @@ class CommentsController < ApplicationController
 
   def destroy
     if @comment.destroy
-      flash[:success] = 'コメントが削除されました'
+      flash[:success] = '削除されました'
       redirect_to article_path(@article)
     else
       @comments = @article.comments
-      flash[:danger] = 'コメントの削除に失敗しました'
+      flash.now[:danger] = '削除に失敗しました'
       render template: 'articles/show'
     end
   end

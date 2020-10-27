@@ -1,9 +1,14 @@
-<%=  form_with(model: [@article,@comment], local: true) do |f| %>
-  <div class="field">
-    <%= f.text_area :comment, placeholder: "コメントする", autofocus: true%>
-  </div>
+<div class="container-fluid">
+  <h2 class="text-center">コメントを編集する</h2>
+  <%=  form_with(model: [@article,@comment], local: true) do |f| %>
+    <div class="col-xs-6 col-xs-offset-3 ">
+      <div class="form-group">
+        <%= f.text_area :comment, placeholder: "コメントする", rows: "5",autofocus: true, class: "form-control"%>
+      </div>
 
-  <div class="actions"> 
-    <%= f.submit "コメントを更新する" %>
-  </div>
-<% end %>
+      <div class="actions"> 
+        <%= f.submit "コメントを更新する", class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+    </div>
+  <% end %>
+</div>
