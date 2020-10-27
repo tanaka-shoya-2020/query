@@ -18,11 +18,11 @@ module ApplicationHelper
              when ''
                'md'
              else
-                language.to_i
-                "language"
+               language.to_i
+               'language'
              end
 
-      CodeRay.scan(code, lang || :text ).div
+      CodeRay.scan(code, lang || :text).div
     end
   end
 

@@ -13,6 +13,7 @@
 
   <div class="col-xs-6">
     <% if article %>
+      <p>プレビュー</p>
       <div class="border">
         <%= markdown(article.text).html_safe %>
       </div>
