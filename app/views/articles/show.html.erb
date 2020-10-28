@@ -32,8 +32,10 @@
     <p> 
       <%= "投稿者: #{comment.user.nickname}"%><br>
       <%= comment.comment %><br />
-      <%= link_to "編集する", edit_article_comment_path(@article,comment) %>,
-      <%= link_to "削除する", article_comment_path(@article,comment), method: :delete, data: { confirm: "本当に削除しますか" } %>
+      <% if current_user == comment.user%>
+        <%= link_to "編集する", edit_article_comment_path(@article,comment) %>,
+        <%= link_to "削除する", article_comment_path(@article,comment), method: :delete, data: { confirm: "本当に削除しますか" } %>
+      <% end%>
     </p>
   <% end%>
 <% end %>
