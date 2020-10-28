@@ -68,3 +68,7 @@ gem 'devise'
 gem 'redcarpet', '~> 2.3.0'
 
 gem 'coderay'
+
+gem 'will_paginate', '3.1.7'
+
+gem 'bootstrap-will_paginate', '1.0.0'

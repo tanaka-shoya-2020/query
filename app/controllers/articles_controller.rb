@@ -4,8 +4,10 @@ class ArticlesController < ApplicationController
   before_action :filter, only: [:edit, :update, :destroy]
 
   def index
-    @room = Room.find(current_room.id)
-    @articles = @room.articles.includes(:user)
+    # @room = Room.find(current_room.id)
+    # @articles = @room.articles.includes(:user)
+    room_id = current_room.id
+    @articles = Article.where(room_id: room_id).paginate(page: params[:page], per_page: 10).order('created_at DESC')
   end
 
   def new
