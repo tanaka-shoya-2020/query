@@ -22,11 +22,14 @@ pre {
 .margin{
   margin-bottom: 100px;
 }
+.top{
+  margin-top: 50px;
+}
+
+.down{
+  margin-bottom: 50px;
+}
 
 textarea{
   resize: none;
-}
-
-.CodeMirror, .CodeMirror-scroll {
-	min-height: 200px;
 }
