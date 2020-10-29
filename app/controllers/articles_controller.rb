@@ -14,7 +14,6 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
-    binding.pry
     if @article.valid?
       flash[:success] = '記事が保存されました'
       @article.save
@@ -27,7 +26,8 @@ class ArticlesController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = Comment.where(article_id: params[:id]).paginate(page: params[:page], per_page: 5).order('created_at DESC')
+    @comments = Comment.where(article_id: params[:id]).paginate(page: params[:page], per_page: 5)
+                       .order('created_at DESC')
   end
 
   def edit
@@ -54,12 +54,13 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    if params[:keyword] == ""
-      flash.now[:danger] = "キーワードを入力してください"
-      render "rooms/index"
-      return
+    if params[:keyword] == ''
+      flash.now[:danger] = 'キーワードを入力してください'
+      render 'rooms/index'
+      nil
     else
-      @articles = Article.search(params[:keyword]).where(room_id: current_room.id).paginate(page: params[:page], per_page: 5).order('created_at DESC')
+      @articles = Article.search(params[:keyword]).where(room_id: current_room.id)
+                         .paginate(page: params[:page], per_page: 5).order('created_at DESC')
     end
   end
 

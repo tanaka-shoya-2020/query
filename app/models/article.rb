@@ -8,8 +8,6 @@ class Article < ApplicationRecord
   has_many   :comments
 
   def self.search(search)
-    if search != ""
-      Article.where('title LIKE(?)', "%#{search}%")
-    end
+    Article.where('title LIKE(?)', "%#{search}%") if search != ''
   end
 end
