@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :articles do
     resources :comments, only: [:create, :edit, :update, :destroy]
+    collection do
+      get 'search'
+    end
   end
 
   resources :users, only: [:show]

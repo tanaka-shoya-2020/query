@@ -1,0 +1,40 @@
+<div class="contents row">
+  <div class="container-fluid">
+    <div class="col-xs-6 col-xs-offset-3">
+      <div class="top down">
+        <%= form_with(url: search_articles_path , local: true, method: :get ) do |form| %>
+          <%= form.text_field :keyword, placeholder: "タイトルを検索する", class:"form-group form-control" %>
+          <%= form.submit "検索", class:"btn btn-primary btn-lg btn-block"%>
+        <% end %>
+      </div>
+      <% if @articles == [] %>
+        <h3>該当する記事が見つかりませんでした</h3>
+      <% else %>
+        <h3>投稿一覧</h3>
+        <%= will_paginate @articles, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
+          <% @articles.each do |article| %>
+            <h3>
+              <details>
+                  <summary>
+                    <%= article.title %>
+                  </summary>
+                <div class= "size" >
+                <%# 長すぎる文章を折り畳み %>
+                  <%= markdown(article.text).html_safe %>
+                </div>
+                <%= link_to "詳細を確認する", article_path(article.id), class: 'btn btn-info btn-block' %>
+                <%# ユーザーが投稿したユーザーかそうでないかで条件分岐 %>
+                <% if user_signed_in? && current_user.id == article.user.id %>
+                  <%= link_to "編集する", edit_article_path(article.id), class: "btn btn-warning btn-block" %>
+                  <%= link_to "削除する", article_path(article.id), method: :delete, class: "btn btn-danger btn-block", data: { confirm: "本当に削除しますか" } %><br>
+                <% end%>
+                <%# 条件分岐終わり %>
+              </details>
+            </h3>
+            投稿者:<%= "#{article.user.nickname}さん" %><br>
+          <% end %>
+        <%= will_paginate @articles, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,34 +1,38 @@
 <div class="container-fluid">
-  <div class="col-xs-6 col-xs-offset-3">
+  <div class="col-xs-10 col-xs-offset-1 col-md-offset-2 col-md-8 col-md-offest-2">
     <h2>
       <%= "#{@user.nickname}さんの投稿一覧" %>
     </h2>
+    <%= will_paginate @articles, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
       <% @articles.each do |article| %>
-      <h3>
-        <details>
-            <summary>
-              <%= article.title %>
-            </summary>
-          <div class= "size" >
-          <%# 長すぎる文章を折り畳み %>
-            <%= markdown(article.text).html_safe %>
-          </div>
-          <%# ユーザーがログインしているかそうでないかなどで条件分岐 %>
-          <% if user_signed_in? && !room_logged_in? %>
-            <p class="container bg-warning size">編集や削除をしたい場合、記事を投稿したルームに入ってください</p><br>
-            <%= link_to 'ルームに入る', new_session_path %>
-          <% elsif current_room != article.room %>
-            <p class="container bg-warning size">ルームが異なるため編集、削除ができません</p><br>
-            <p class="size1">上記の記事を投稿したルームは<strong><%= "#{article.room.name}" %></strong>です</p>
-          <% else %>
-            <%= link_to "詳細を確認する", article_path(article.id), class: 'btn btn-info btn-block' %>
-            <%= link_to "編集する", edit_article_path(article), class: "btn btn-warning btn-block"  %>
-            <%= link_to "削除する", article_path(article), method: :delete, class: "btn btn-danger btn-block", data: { confirm: "本当に削除しますか"} %>
-          <% end %>
-          <%# 条件分岐終わり %>
-        </details>
-      </h3>
-    <% end %>
-    <%= link_to "トップページに戻る", root_path%>
+        <h3>
+          <details>
+              <summary>
+                <%= article.title %>
+              </summary>
+            <div class= "size" >
+            <%# 長すぎる文章を折り畳み %>
+              <%= markdown(article.text).html_safe %>
+            </div>
+            <%# ユーザーがログインしているかそうでないかなどで条件分岐 %>
+            <% if user_signed_in? && !room_logged_in? %>
+              <p class="container bg-warning size">編集や削除をしたい場合、記事を投稿したルームに入ってください</p><br>
+              <%= link_to 'ルームに入る', new_session_path, class:"size" %>
+            <% elsif current_room != article.room %>
+              <p class="container bg-warning size">ルームが異なるため編集、削除ができません</p><br>
+              <p class="size1">上記の記事を投稿したルームは<strong><%= "#{article.room.name}" %></strong>です</p>
+            <% else %>
+              <%= link_to "詳細を確認する", article_path(article.id), class: 'btn btn-info btn-block' %>
+              <%= link_to "編集する", edit_article_path(article), class: "btn btn-warning btn-block"  %>
+              <%= link_to "削除する", article_path(article), method: :delete, class: "btn btn-danger btn-block", data: { confirm: "本当に削除しますか"} %>
+            <% end %>
+            <%# 条件分岐終わり %>
+          </details>
+        </h3>
+      <% end %>
+    <%= will_paginate @articles, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
+    <p>
+      <%= link_to "トップページに戻る", root_path%>
+    </p>
   </div>
 </div>

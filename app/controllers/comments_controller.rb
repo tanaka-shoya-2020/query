@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-    @comments = @article.comments
+    @comments = Comment.where(article_id: params[:article_id]).paginate(page: params[:page], per_page: 5).order('created_at DESC')
     if @comment.valid?
       flash[:success] = 'コメントが投稿されました'
       @comment.save
@@ -35,7 +35,6 @@ class CommentsController < ApplicationController
       flash[:success] = '削除されました'
       redirect_to article_path(@article)
     else
-      @comments = @article.comments
       flash.now[:danger] = '削除に失敗しました'
       render template: 'articles/show'
     end

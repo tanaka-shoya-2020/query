@@ -4,8 +4,8 @@ class ArticlesController < ApplicationController
   before_action :filter, only: [:edit, :update, :destroy]
 
   def index
-    @room = Room.find(current_room.id)
-    @articles = @room.articles.includes(:user)
+    room_id = current_room.id
+    @articles = Article.where(room_id: room_id).paginate(page: params[:page], per_page: 10).order('created_at DESC')
   end
 
   def new
@@ -26,7 +26,8 @@ class ArticlesController < ApplicationController
 
   def show
     @comment = Comment.new
-    @comments = @article.comments
+    @comments = Comment.where(article_id: params[:id]).paginate(page: params[:page], per_page: 5)
+                       .order('created_at DESC')
   end
 
   def edit
@@ -49,6 +50,17 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     else
       render :show
+    end
+  end
+
+  def search
+    if params[:keyword] == ''
+      flash.now[:danger] = 'キーワードを入力してください'
+      render 'rooms/index'
+      nil
+    else
+      @articles = Article.search(params[:keyword]).where(room_id: current_room.id)
+                         .paginate(page: params[:page], per_page: 5).order('created_at DESC')
     end
   end
 
