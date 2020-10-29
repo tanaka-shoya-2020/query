@@ -14,6 +14,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    binding.pry
     if @article.valid?
       flash[:success] = '記事が保存されました'
       @article.save
@@ -49,6 +50,16 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     else
       render :show
+    end
+  end
+
+  def search
+    if params[:keyword] == ""
+      flash.now[:danger] = "キーワードを入力してください"
+      render "rooms/index"
+      return
+    else
+      @articles = Article.search(params[:keyword]).where(room_id: current_room.id).paginate(page: params[:page], per_page: 5).order('created_at DESC')
     end
   end
 

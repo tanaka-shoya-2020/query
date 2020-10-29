@@ -6,4 +6,10 @@ class Article < ApplicationRecord
   belongs_to :user
   belongs_to :room
   has_many   :comments
+
+  def self.search(search)
+    if search != ""
+      Article.where('title LIKE(?)', "%#{search}%")
+    end
+  end
 end

@@ -1,8 +1,5 @@
 <div class="container-fluid">
-  <div>
-    <%= link_to "検索する", '#'%>
-  </div>
-  <div class="col-xs-6 col-xs-offset-3">
+  <div class="col-xs-10 col-xs-offset-1 col-md-offset-2 col-md-8 col-md-offest-2">
   <h3>投稿一覧</h3>
     <%= will_paginate @articles, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
       <% @articles.each do |article| %>

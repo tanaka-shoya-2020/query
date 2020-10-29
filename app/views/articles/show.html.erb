@@ -1,4 +1,4 @@
-<div class="col-xs-6">
+<div class="col-sm-8 col-xs-12">
   <h3>タイトル:
       <%= @article.title %><br>
   </h3>
@@ -16,8 +16,21 @@
   <h3>コメント投稿</h3>
   <%=  form_with(model: [@article,@comment], local: true) do |f| %>
     <div class="form-group">
-      <%= f.text_area :comment, placeholder: "コメントする", rows: "5",autofocus: true, class: "form-control"%>
+      <%= f.text_area :comment, placeholder: "コメントする",autofocus: true, class: "form-control", id: "editor" %>
     </div>
+
+    <script>
+      var simplemde = new SimpleMDE({ 
+        element: document.getElementById("editor"),
+        tabSize: 4});
+    </script>
+    <script>
+        marked.setOptions({
+              sanitize: true,
+              sanitizer: escape,
+              breaks : true
+          });
+    </script>
 
     <div class="actions"> 
       <%= f.submit "コメントを投稿する", class: "btn btn-primary btn-lg btn-block margin" %>
@@ -25,7 +38,7 @@
   <% end %>
 </div>
 
-<div class="col-xs-6">
+<div class="col-sm-4 cos-xs-12">
   <% if @comments %>
     <h4>コメント一覧</h4>
     <%= will_paginate @comments, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>

@@ -26,3 +26,7 @@ pre {
 textarea{
   resize: none;
 }
+
+.CodeMirror, .CodeMirror-scroll {
+	min-height: 200px;
+}
