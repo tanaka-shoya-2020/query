@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     else
       flash.now[:danger] = '記事が保存されませんでした'
-      render :new
+      render "articles/create"
     end
   end
 
