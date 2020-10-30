@@ -11,8 +11,8 @@ RSpec.describe Comment, type: :model do
         expect(@comment).to be_valid
       end
 
-      it 'コメントが200文字以内の時' do
-        @comment.comment = 'a' * 200
+      it 'コメントが1000文字以内の時' do
+        @comment.comment = 'a' * 1000
         expect(@comment).to be_valid
       end
     end
@@ -24,10 +24,10 @@ RSpec.describe Comment, type: :model do
         expect(@comment.errors.full_messages).to include("Comment can't be blank")
       end
 
-      it 'コメントが201文字以上の時' do
-        @comment.comment = 'a' * 201
+      it 'コメントが1001文字以上の時' do
+        @comment.comment = 'a' * 1001
         @comment.valid?
-        expect(@comment.errors.full_messages).to include('Comment is too long (maximum is 200 characters)')
+        expect(@comment.errors.full_messages).to include('Comment is too long (maximum is 1000 characters)')
       end
 
       it 'userの紐付けがなくなった時' do
