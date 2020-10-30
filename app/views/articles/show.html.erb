@@ -1,4 +1,4 @@
-<div class="col-sm-8 col-xs-12">
+<div class="col-sm-8">
   <h3>タイトル:
       <%= @article.title %><br>
   </h3>
@@ -38,7 +38,7 @@
   <% end %>
 </div>
 
-<div class="col-sm-4 cos-xs-12">
+<div class="col-sm-4">
   <% if @comments %>
     <h4>コメント一覧</h4>
     <%= will_paginate @comments, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
