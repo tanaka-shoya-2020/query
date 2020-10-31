@@ -1,4 +1,31 @@
 <div class="container-fluid">
   <h2 class="text-center">新規投稿</h2>
-  <%= render partial: "form" %>
+  <%= form_with model: @article, local: true do |f| %>
+    <div class="col-xs-10 col-xs-offset-1 col-md-offset-2 col-md-8 col-md-offest-2">
+      <div class="form-group">
+        <%= f.label :タイトル %>
+        <%= f.text_area :title, placeholder: "タイトルを入力してください(最大50文字)",class: "form-control",autofocus: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :テキスト %><br />
+        <%= f.text_area :text, rows: "20",class: "form-control",autocomplete: true, id:"editor"%>
+      </div>
+    </div>
+
+    <script>
+      var simplemde = new SimpleMDE({ element: document.getElementById("editor"),
+      tabSize: 4});
+    </script>
+    <script>
+        marked.setOptions({
+              sanitize: true,
+              sanitizer: escape,
+              breaks : true
+          });
+    </script>
+      <div class="actions">
+        <%= f.submit "投稿する",class: "btn btn-primary btn-lg btn-block" %>
+      </div>
+  <% end%>
 </div>
