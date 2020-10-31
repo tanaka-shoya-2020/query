@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "ルーム作成機能", type: :system do
+RSpec.describe 'ルーム作成機能', type: :system do
   before do
     @room = FactoryBot.build(:room)
     @user = FactoryBot.create(:user)
@@ -19,7 +19,7 @@ RSpec.describe "ルーム作成機能", type: :system do
       fill_in 'room[password]', with: @room.password
       fill_in 'room[password_confirmation]', with: @room.password_confirmation
       # ルーム作成ボタンを押すとルームモデルのカウント数が1増えることを確認する
-      expect{ click_on('ルームを作成') }.to change{ Room.count }.by(1)
+      expect { click_on('ルームを作成') }.to change { Room.count }.by(1)
       # トップページへ遷移することを確認する
       expect(current_path).to eq root_path
       # トップページにルーム作成が成功したことを表示するメッセージがあることを確認する
@@ -41,11 +41,11 @@ RSpec.describe "ルーム作成機能", type: :system do
       # ルームを作成ページに遷移する
       visit new_room_path
       # 作成するための情報を入力する
-      fill_in 'room[name]', with: ""
+      fill_in 'room[name]', with: ''
       fill_in 'room[password]', with: @room.password
       fill_in 'room[password_confirmation]', with: @room.password_confirmation
       # ルームを作成するボタンを押してもルームモデルのカウント数が変わらないことを確認
-      expect{ click_on('ルームを作成') }.to change{ Room.count }.by(0)
+      expect { click_on('ルームを作成') }.to change { Room.count }.by(0)
       # ルーム作成ページへ戻されることを確認する
       expect(current_path).to eq rooms_path
       # 戻された後にエラーメッセージが表示されていることを確認する
@@ -58,12 +58,12 @@ RSpec.describe "ルーム作成機能", type: :system do
       # ログインページに戻されることを確認する
       expect(current_path).to eq new_user_session_path
       # 戻された後にエラーメッセージが表示されていることを確認する
-      expect(page).to have_content("ログインが必要です")
+      expect(page).to have_content('ログインが必要です')
     end
   end
 end
 
-RSpec.describe "ルーム入室機能", type: :system do
+RSpec.describe 'ルーム入室機能', type: :system do
   before do
     @room = FactoryBot.create(:room)
     @user = FactoryBot.create(:user)
@@ -82,7 +82,7 @@ RSpec.describe "ルーム入室機能", type: :system do
       click_on('入室する')
       # ルートページへ遷移することを確認する
       expect(current_path).to eq root_path
-      #トップページにルームに入室するのに成功したメッセージが表示されることを確認する
+      # トップページにルームに入室するのに成功したメッセージが表示されることを確認する
       expect(page).to have_content('ルームに入室しました')
     end
   end
@@ -94,7 +94,7 @@ RSpec.describe "ルーム入室機能", type: :system do
       # ルームの入室画面へ遷移する
       visit new_session_path
       # 入室するための情報を入力する
-      fill_in 'session[name]', with: ""
+      fill_in 'session[name]', with: ''
       fill_in 'session[password]', with: @room.password
       # 入室するボタンを押す
       click_on('入室する')

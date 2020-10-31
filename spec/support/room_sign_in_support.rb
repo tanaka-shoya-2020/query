@@ -1,5 +1,5 @@
 module RoomSignInSupport
-  def room_sign_in(room)
+  def room_sign_in(_room)
     expect(page).to have_link('ルームに入る')
     visit sessions_path
     fill_in 'session[name]'

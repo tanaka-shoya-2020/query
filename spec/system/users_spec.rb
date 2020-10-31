@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "ユーザー新規登録機能", type: :system do
+RSpec.describe 'ユーザー新規登録機能', type: :system do
   before do
     @user = FactoryBot.build(:user)
   end
@@ -19,7 +19,7 @@ RSpec.describe "ユーザー新規登録機能", type: :system do
       fill_in 'user[password]', with: @user.password
       fill_in 'user[password_confirmation]', with: @user.password_confirmation
       # サインアップボタンを押すとユーザーモデルのカウントが1増える
-      expect{ click_on("サインアップ") }.to change{ User.count }.by(1)
+      expect { click_on('サインアップ') }.to change { User.count }.by(1)
       # トップページへ遷移することを確認する
       expect(current_path).to eq root_path
       # トップページにサインインが成功した文字が表示されることを確認する
@@ -42,17 +42,17 @@ RSpec.describe "ユーザー新規登録機能", type: :system do
       # ユーザー情報を入力する
       fill_in 'user[nickname]', with: @user.nickname
       fill_in 'user[email]', with: @user.email
-      fill_in 'user[password]', with: ""
-      fill_in 'user[password_confirmation]', with: ""
+      fill_in 'user[password]', with: ''
+      fill_in 'user[password_confirmation]', with: ''
       # サインアップボタンを押してもユーザーモデルのカウント数が変化しないことを確認する
-      expect{ click_on("サインアップ") }.to change{ User.count }.by(0)
+      expect { click_on('サインアップ') }.to change { User.count }.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq user_registration_path
     end
   end
 end
 
-RSpec.describe "ユーザーログイン機能", type: :system do
+RSpec.describe 'ユーザーログイン機能', type: :system do
   before do
     @user = FactoryBot.create(:user)
   end
@@ -69,7 +69,7 @@ RSpec.describe "ユーザーログイン機能", type: :system do
       fill_in 'user[email]', with: @user.email
       fill_in 'user[password]', with: @user.password
       # ログインボタンを押す
-      click_on("ログイン")
+      click_on('ログイン')
       # トップページへ遷移することを確認する
       expect(current_path).to eq root_path
       # トップページにサインインが成功した文字が表示されることを確認する
@@ -91,7 +91,7 @@ RSpec.describe "ユーザーログイン機能", type: :system do
       # ログインページへ遷移する
       visit new_user_session_path
       # ユーザー情報を入力する
-      fill_in 'user[email]', with: ""
+      fill_in 'user[email]', with: ''
       fill_in 'user[password]', with: @user.password
       # ログインボタンを押す
       click_on('ログイン')
