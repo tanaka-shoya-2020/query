@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :move_to_root_path, only: [:new, :create]
+  before_action :move_to_sign_in, only: [:new, :create]
 
   def index
   end
@@ -27,7 +27,9 @@ class RoomsController < ApplicationController
     params.require(:room).permit(:name, :password, :password_confirmation)
   end
 
-  def move_to_root_path
-    redirect_to root_path unless user_signed_in?
+  def move_to_sign_in
+    return if user_signed_in?
+      flash[:danger] = "ログインが必要です"
+      redirect_to new_user_session_path 
   end
 end
