@@ -75,10 +75,10 @@ class ArticlesController < ApplicationController
   end
 
   def move_to_sign_in
-    if !room_logged_in?
-      flash[:danger] = 'ルームに入室してください'
-      redirect_to new_session_path
-    end
+    return if room_logged_in?
+
+    flash[:danger] = 'ルームに入室してください'
+    redirect_to new_session_path
   end
 
   def filter

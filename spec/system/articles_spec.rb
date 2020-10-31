@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "新規投稿機能", type: :system do
+RSpec.describe '新規投稿機能', type: :system do
   before do
     @article = FactoryBot.build(:article)
     @room    = FactoryBot.create(:room)
@@ -35,7 +35,7 @@ RSpec.describe "新規投稿機能", type: :system do
       # 新規投稿ページへ遷移する
       visit new_article_path
       # 投稿ページに不正な情報を入力する
-      fill_in 'article[title]', with: ""
+      fill_in 'article[title]', with: ''
       # 記事を投稿するボタンを押してもarticleモデルのカウント数が変わらないことを確認する
       expect { click_on('投稿する') }.to change { Article.count }.by(0)
       # 新規投稿ページへ戻されることを確認する
@@ -66,7 +66,7 @@ RSpec.describe "新規投稿機能", type: :system do
   end
 end
 
-RSpec.describe "投稿閲覧機能", type: :system do
+RSpec.describe '投稿閲覧機能', type: :system do
   before do
     @article = FactoryBot.build(:article)
     @room    = FactoryBot.create(:room)
@@ -109,7 +109,7 @@ RSpec.describe "投稿閲覧機能", type: :system do
   end
 end
 
-RSpec.describe "投稿編集機能", type: :system do
+RSpec.describe '投稿編集機能', type: :system do
   before do
     @article = FactoryBot.create(:article)
     @room    = FactoryBot.create(:room)
@@ -129,9 +129,9 @@ RSpec.describe "投稿編集機能", type: :system do
       # 現在のページが編集画面であることを確認する
       expect(current_path).to eq edit_article_path(@article)
       # 情報を変更する
-      fill_in 'article[title]', with: "foobar"
+      fill_in 'article[title]', with: 'foobar'
       # 編集するボタンを押しても、articleモデルの数が変わらないことを確認する
-      expect{ click_on('編集する')}. to change { Article.count }.by(0)
+      expect { click_on('編集する') }.to change { Article.count }.by(0)
       # 投稿詳細ページへ遷移することを確認する
       expect(current_path).to eq article_path(@article)
       # 編集に成功したときにメッセージが表示されることを確認する
@@ -150,9 +150,9 @@ RSpec.describe "投稿編集機能", type: :system do
       # 現在のページが編集画面であることを確認する
       expect(current_path).to eq edit_article_path(@article)
       # 情報を変更する
-      fill_in 'article[title]', with: ""
+      fill_in 'article[title]', with: ''
       # 編集するボタンを押しても、articleモデルの数が変わらないことを確認する
-      expect{ click_on('編集する')}. to change { Article.count }.by(0)
+      expect { click_on('編集する') }.to change { Article.count }.by(0)
       # 編集画面へ戻されることを確認する
       expect(current_path).to eq article_path(@article)
       # 戻されたときにエラーメッセージが表示されることを確認する
@@ -207,7 +207,7 @@ RSpec.describe "投稿編集機能", type: :system do
   end
 end
 
-RSpec.describe "投稿削除機能", type: :system do
+RSpec.describe '投稿削除機能', type: :system do
   before do
     @article = FactoryBot.create(:article)
     @room    = FactoryBot.create(:room)
