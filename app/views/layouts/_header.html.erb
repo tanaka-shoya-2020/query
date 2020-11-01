@@ -8,9 +8,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<%= link_to "Query", root_path, class:"navbar-brand"%>
-      <% if !user_signed_in? %> 
-        <p class="navbar-brand size">ようこそ、記事投稿アプリへ</p>
-      <% else %> 
+      <% if user_signed_in? %> 
         <%= link_to "#{current_user.nickname}さん", user_path(current_user), class:"navbar-brand size"%> 
       <% end %>
 		</div>

@@ -2,6 +2,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :move_to_sign_in
   before_action :filter, only: [:edit, :update, :destroy]
+  before_action :rollback, only: [:show]
 
   def index
     room_id = current_room.id
@@ -20,7 +21,7 @@ class ArticlesController < ApplicationController
       redirect_to articles_path
     else
       flash.now[:danger] = '記事が保存されませんでした'
-      render "articles/create"
+      render 'articles/create'
     end
   end
 
@@ -75,22 +76,26 @@ class ArticlesController < ApplicationController
   end
 
   def move_to_sign_in
-    if !user_signed_in?
-      flash[:danger] = 'ログインしてください'
-      redirect_to new_session_path
-    elsif !room_logged_in?
-      flash[:danger] = 'ルームに入室してください'
-      redirect_to new_session_path
-    end
+    return if room_logged_in?
+
+    flash[:danger] = 'ルームに入室してください'
+    redirect_to new_session_path
   end
 
   def filter
     if current_user != @article.user
-      flash.now[:danger] = '自身の投稿ではありません'
+      flash[:danger] = '自身の投稿ではありません'
       redirect_to root_path
     elsif current_room != @article.room
-      flash.now[:danger] = 'その記事はこのルームのものではないため、編集、削除はできません'
+      flash[:danger] = 'その記事はこのルームのものではないため、編集、削除はできません'
       redirect_to root_path
     end
+  end
+
+  def rollback
+    return unless current_room != @article.room
+
+    flash[:danger] = 'その記事はこのルームのものではないため、編集、削除はできません'
+    redirect_to root_path
   end
 end

@@ -1,13 +1,77 @@
-<% if user_signed_in? && room_logged_in? %>
-  <div class="container-fluid">
-    <h2 class="text-center">検索する</h2>
-      <div class="col-xs-6 col-xs-offset-3">
+<div class="container-fluid">
+  <% if !user_signed_in? %>
+    <div class="col-xs-10 col-xs-offset-1 col-md-offset-2 col-md-8 col-md-offest-2 down">
+      <h3>ようこそ、記事投稿アプリへ !</h3>
+      <h3 class="bg-info ">アプリの概要</h3>
+      <div class="down">
+        <p>このアプリは新米エンジニアに是非とも活用していただきたい記事投稿アプリです。</p>
+        <p>内容は非常にシンプルで、新規登録をした後、既に存在するルームに入室するか、ご自身でルームを作成していただくことで、
+        自由に記事の投稿、閲覧、コメントなどを行うことができます。</p>
+        <p>仮に他の方に投稿を見られたくない場合でも、自身の投稿以外はその投稿を行ったルームでしか閲覧することができないため、プライバシー
+        も守られています</p>
+      </div>
+      <h3 class="bg-info">アプリの使い方</h3>
+      <h4 class="bg-warning">新規登録やログインのやり方</h4>
+      <div class="col-lg-6 down-small">
+        <h5>ユーザーの新規登録が完了していない場合</h5>
+        <%= image_tag("query-sign_up.png", size: '350x200') %>
+        <p>画面上部の右側にある「新規登録」ボタンを押していただくと、新規登録ページに遷移します。<br>
+        そこで、ユーザーの登録情報を入力していただくと、ログイン済みのページへと遷移します。</p>
+      </div>
+      <div class="col-lg-6 down">
+        <h5>ユーザーの新規登録が完了している場合</h5>
+        <%= image_tag("query-sign_in.png", size: '350x200')%>
+        <p>画面上部の右側にある「ログイン」ボタンを押していただくと、ログインページに遷移します。<br>
+        そこで、ご自身のメールアドレスとパスワードを入力していただくと、ログイン済みのページへと遷移します</p>
+      </div>
+    </div>
+  <% elsif user_signed_in? && !room_logged_in? %>
+    <div class="col-xs-10 col-xs-offset-1 col-md-offset-2 col-md-8 col-md-offest-2 down">
+      <h3 class="bg-info">アプリの使い方</h3>
+      <h4 class="bg-warning">ログインが済んだら</h4> 
+      <div class="col-lg-6 down-small">
+        <h5>新しくルームを作成する場合</h5>
+        <%= image_tag("query-room_create.png", size: '350x200')%>
+        <p>画面上部左側にある「ルームを作成する」というリンクをクリックしていただくと、ルーム作成画面に遷移します。<br>
+        そこで、好きな名前のルーム(既に登録されている名前では登録できません)とパスワードを入力されるとルームに入室します。</p>
+      </div>
+      <div class="col-lg-6 down">
+        <h5>既にあるルームに入室する場合</h5>
+        <%= image_tag("query-room_in.png", size: '350x200')%>
+        <p>画面上部左側にある「ルームに入室する」というリンクをクリックしていただくと、ルームに入室するという画面に遷移します。<br>
+        そこで、既に登録されたルーム名とパスワードを入力していただくと、ルームに入室します。</p>
+      </div>
+    </div>
+  <% else %>
+    <div class="col-xs-6 col-xs-offset-3 margin">
+      <h2 class="text-center">検索する</h2>
         <%= form_with(url: search_articles_path , local: true, method: :get ) do |form| %>
           <%= form.text_field :keyword, placeholder: "タイトルを検索する", class:"form-group form-control" %>
           <%= form.submit "検索", class:"btn btn-primary btn-lg btn-block"%>
         <% end %>
       </div>
-  </div>
-<% end %>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1 col-md-offset-2 col-md-8 col-md-offest-2 down">
+      <h3 class="bg-info">アプリの使い方</h3>
+      <h4 class="bg-warning">ルームに入室したら</h4>
+      <div class="col-lg-6 down-small">
+        <h5>新規投稿をしたいとき</h5>
+        <%= image_tag("query-article_new.png", size: '350x200')%>
+        <p>画面上部左側にある「記事を投稿する」というリンクをクリックしていただくと、新規投稿画面に遷移します。<br>
+        そこで、タイトルとテキストを入力していただくと、自身の投稿画面や一覧画面で投稿した記事の編集などが行えます。<br>
+        <strong>(注)今回はマークダウンを採用させていただております。<br>
+        そのため、普通のテキストとしても使用できますことは勿論、コードなどの記述の場合はマークダウンの書き方に沿って書いていただきますと
+        フォントサイズなどが変更されます。</strong></p>
+      </div>
+      <div class="col-lg-6 down">
+        <h5>記事の閲覧をしたいとき</h5>
+        <%= image_tag("query-article_index.png", size: '350x200')%>
+        <p>画面上部左側にある「記事を閲覧する」というリンクをクリックしていただくと、記事の一覧画面に遷移します。<br>
+        ここでは、自分の投稿した記事以外にも同じルーム内で投稿した方達の投稿の閲覧やコメントもすることができます。</p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 
 
