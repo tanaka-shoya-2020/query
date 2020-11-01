@@ -57,11 +57,11 @@ class CommentsController < ApplicationController
 
   def filter
     if !user_signed_in?
-      flash[:danger] = 'ログインしてください'
+      flash[:danger] = 'ログインが必要です'
       redirect_to new_user_session_path
     elsif !room_logged_in?
       flash[:danger] = 'ルームに入室してください'
-      redirect_to root_path
+      redirect_to new_session_path
     elsif current_room != @article.room
       flash[:danger] = 'ルームが異なるためコメントできません'
       redirect_to root_path

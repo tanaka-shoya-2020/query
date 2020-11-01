@@ -5,7 +5,7 @@ class Article < ApplicationRecord
 
   belongs_to :user
   belongs_to :room
-  has_many   :comments
+  has_many   :comments, dependent: :destroy
 
   def self.search(search)
     Article.where('title LIKE(?)', "%#{search}%") if search != ''

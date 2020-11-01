@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :move_to_sign_in
-  before_action :filter, only: [:show, :edit, :update, :destroy]
+  before_action :filter, only: [:edit, :update, :destroy]
+  before_action :rollback, only: [:show]
 
   def index
     room_id = current_room.id
@@ -89,5 +90,12 @@ class ArticlesController < ApplicationController
       flash[:danger] = 'その記事はこのルームのものではないため、編集、削除はできません'
       redirect_to root_path
     end
+  end
+
+  def rollback
+    return unless current_room != @article.room
+
+    flash[:danger] = 'その記事はこのルームのものではないため、編集、削除はできません'
+    redirect_to root_path
   end
 end
