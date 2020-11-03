@@ -34,7 +34,7 @@
 | foobar2@gmail.com| foobar1   |テストルーム1| foobar1       |
 
 # 利用方法
-<image_src("query-room_in.png", size='350x200')>
+<image_src="query-room_in.png", size='350x200'>
 # テーブル設計
 
 ## users テーブル
