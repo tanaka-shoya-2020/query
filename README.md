@@ -145,6 +145,25 @@ Qiitaのようなプログラミングに関する技術情報共有サービス
 
 # ローカルでの動作方法
 
+% ruby --version  を実行します。
+
+バージョンが2.6.5であることを確認します。
+
+次に、ローカルにアプリケーションをクローンします。
+
+% git clone https://github.com/tanaka-shoya-2020/query.git
+
+アプリケーションのディレクトリに移動します。
+
+% cd query
+
+gemをインストールします。
+
+% bundle install
+
+yarnをインストールします。
+
+% yarn install
 
 
 
