@@ -17,6 +17,7 @@
             <%# ユーザーがログインしているかそうでないかなどで条件分岐 %>
             <% if user_signed_in? && !room_logged_in? %>
               <p class="container bg-warning size">編集や削除をしたい場合、記事を投稿したルームに入ってください</p><br>
+              <p class="size1">上記の記事を投稿したルームは<strong><%= "#{article.room.name}" %></strong>です</p>
               <%= link_to 'ルームに入る', new_session_path, class:"size" %>
             <% elsif current_room != article.room %>
               <p class="container bg-warning size">ルームが異なるため編集、削除ができません</p><br>
