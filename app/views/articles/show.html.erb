@@ -43,16 +43,21 @@
     <h4>コメント一覧</h4>
     <%= will_paginate @comments, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
       <% @comments.each do |comment| %>
-        <p> 
-          <%= "投稿者: #{comment.user.nickname}"%><br>
+        <p>
+          <details>
+            <summary>
+              <%= "投稿者: #{comment.user.nickname}"%><br>
+            </summary>
           <%= markdown(comment.comment).html_safe %><br>
           <% if current_user == comment.user%>
             <%= link_to "編集する", edit_article_comment_path(@article,comment),class:"btn btn-primary" %>
             <%= link_to "削除する", article_comment_path(@article,comment), class:"btn btn-danger space", method: :delete, data: { confirm: "本当に削除しますか" } %>
           <% end%>
+          </details>
         </p>
       <% end%>
     <%= will_paginate @comments, :previous_label => '&lt 前へ', :next_label => '次へ &gt', inner_window: 1, outer_window: 0 %>
   <% end %>
 </div>
+
 
