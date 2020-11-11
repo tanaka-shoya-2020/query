@@ -74,6 +74,7 @@ Qiitaのようなプログラミングに関する技術情報共有サービス
 
 # インフラ設計
 ![Queryインフラ設計図](https://user-images.githubusercontent.com/71364105/98805691-4e58d300-245b-11eb-9104-fc1e3a972909.jpg)
+
 # テーブル設計
 
 ## users テーブル
