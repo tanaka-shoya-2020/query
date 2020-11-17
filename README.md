@@ -73,7 +73,7 @@ Qiitaのようなプログラミングに関する技術情報共有サービス
 | slackへの投稿通知機能 | 自身のした投稿や記事に対するコメントなどを確認しやすくするため。|
 
 # インフラ設計
-![Queryインフラ設計図](https://user-images.githubusercontent.com/71364105/98805691-4e58d300-245b-11eb-9104-fc1e3a972909.jpg)
+![Query](https://user-images.githubusercontent.com/71364105/99338626-e88ba180-28c7-11eb-9403-01448ddd4daf.png)
 
 # テーブル設計
 
